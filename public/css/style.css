@@ -1,0 +1,25 @@
+
+#area {
+    background-image: url('../img/grid.png');
+    width: 961px;  /* 80 * 12 + 1 */
+    height: 401px; /* 80 * 5 + 1 */ 
+}
+
+.center {
+    text-align: center;
+    position: relative;
+}
+
+.buttons .btn {
+    float:right;
+
+    margin-left: 10px;
+}
+
+#area {
+    cursor: crosshair;
+}
+
+#area:active { 
+    cursor: crosshair;
+}

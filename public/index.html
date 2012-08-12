@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Handwritting calculator</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type='text/css' />
+        <link rel="stylesheet" href="css/style.css" type='text/css' />
+
+        <script type='text/javascript' src='js/jquery.js'></script>
+        <script type='text/javascript' src='js/main.js'></script>
+        <script type='text/javascript' src='js/submit.js'></script>
+
+    </head>
+
+
+    <body>
+        <div class='container'>
+            
+            <h1 class='page-header'>Handwriting Recognition Calculator</h1>
+            
+            <p>
+                <div class='row'>
+                    <div class='span12 center'>
+                        <canvas id='area' width=961 height=401 >Sorry your browser doesn't support the canvas element</canvas> 
+                    </div>
+                </div>
+            </p>
+
+            <div class='row'>
+                <div class='span12 buttons'>
+                    <button class='btn btn-danger clear-btn'>Clear input</button>
+                    <button class='btn btn-primary submit-btn'>Recognize and calculate</button>
+                </div>
+            </div>
+
+            <p id='answer'>
+                            
+            </p>
+
+        </div>    
+    </body>
+
+</html>
