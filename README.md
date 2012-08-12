@@ -1,2 +1,2 @@
-Handwritten recognizing calculator
+Handwriting Recognition Calculator
 ==================================
