@@ -26,6 +26,7 @@ class Recognizer
 
         for d in SOM_DATA do
             node, distance =  @som.find_bmu( d )
+            @neurons.push node
             print node, " { x : ", node.x, " , y : ",  node.y, " } -> ",  distance, "\n"
         end 
         
@@ -33,10 +34,19 @@ class Recognizer
     end
 
     def recognize( d )
+        min_d = 1000 # some very large number
+        node = nil
+        index = 0
         
-        node, distance = @som.find_bmu( d )
+        @neuons.each_with_index do |n, i|
+            if min_d >= n.distance_to_input( d ) then
+                node = n
+                min_d = node.distance_to_input( d ) # plain stupid
+                index = i
+            end
+        end 
         
-        return node
+        return index 
     end
 
 end
