@@ -9,7 +9,7 @@ var X, Y;
     var HEIGHT = 80;
 
     var PANE = { width : 12, height : 5 };
-    var GRID = { width : 10, height : 14 };
+    var GRID = { width : 5, height : 7 };
 
     function downSample() {
         var rez = [];
@@ -84,13 +84,21 @@ var X, Y;
         renderDownsampled(result);
         renderData(result); 
         
-        /*
         for( var i = 0; i < result.length; i++ ) {
-            $.post('/', { data : result[i]}, function(data) {
-                console.log(i, " -> ", data );
-            });
+            if( result[i] === null ) continue;
+            var data = [];
+
+            for( var y = 0; y < GRID.height; y++) {
+                for( var x = 0; x < GRID.width; x++) {
+                    data.push( result[i][y][x] ? 1 : 0 );
+                }
+            }
+            (function (i) {
+            $.post('/', { data : data}, function(data) {
+                console.log( i, " -> ", data );
+            });}(i))
         }
-        */
+
     }
 
 

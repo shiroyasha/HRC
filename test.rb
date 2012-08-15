@@ -6,7 +6,7 @@ require './data/data'
 class Recognizer
 
     def initialize
-        @som = Ai4r::Som::Som.new( 140, 8, Ai4r::Som::Layer.new( 64, 3 ) )
+        @som = Ai4r::Som::Som.new( 35, 8, Ai4r::Som::Layer.new( 64, 3 ) )
         @som.initiate_map
         puts "global_error", @som.global_error( SOM_DATA )
 
@@ -34,19 +34,11 @@ class Recognizer
 
     def recognize( d )
         
-        rez = @som.find_bmu( d )
-        #puts "rez", rez
-        i = 0
-
-        while i < @neurons.length
-            if rez == @neurons[i] then return i end
-            i = i + 1
-        end
+        node, distance = @som.find_bmu( d )
         
-        return nil
+        return node
     end
 
 end
 
 
-r = Recognizer.new

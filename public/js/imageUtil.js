@@ -1,7 +1,7 @@
 var DownSampler = function() {
     public = {};
 
-    function visual(x, y, w, h ) {
+    function visual(color, x, y, w, h ) {
 
         console.log( X, Y );
         var canvas = document.getElementById("area");
@@ -9,7 +9,7 @@ var DownSampler = function() {
         var c = canvas.getContext('2d');
         c.save();
         c.lineWidth = 1;
-        c.strokeStyle= '#f00';
+        c.strokeStyle= color;
         c.strokeRect( X + x, Y + y, w, h );
         c.restore();
         
@@ -78,15 +78,15 @@ var DownSampler = function() {
                arg.x = area.x + j * w ;
                arg.y = area.y + i * h ;
 
-               arg.width = ( j < grid.width - 1 ) ? w : area.width - (j-1)*w ;
-               arg.height = ( i < grid.height - 1 ) ? h : area.height - (i-1)*h ;
+               arg.width = ( j < grid.width - 1 ) ? w : area.width - j*w ;
+               arg.height = ( i < grid.height - 1 ) ? h : area.height - i*h ;
               
                //console.log( arg );
                ret[i][j] = findPixel( image, arg );
-               visual( arg.x, arg.y, arg.width, arg.height );
+               visual( "#f00", arg.x, arg.y, arg.width, arg.height );
            }
        }
-       visual( area.x, area.y, area.width, area.height );
+       visual( "#0f0", area.x, area.y, area.width, area.height );
 
        console.log( ret );
 

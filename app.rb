@@ -11,27 +11,14 @@ end
 
 post '/' do
     
-        data = params["data"]
+        data = params["data"].map { |i| i.to_f }
+         
+
+        print data, "\n"
+        node = r.recognize( data )
         
-        obrada = data.map { |t| t.to_f }
-        #print obrada, "\n"  
-
-        v = r.recognize( obrada )
-
-        puts ' result start ', v
-        print obrada, "\n"
-        puts ' result end '
-        #if v == nil then 
-        #    return "not found"
-        #else
-        #    return v
-        #end
-        return 4
-
-    #rescue
-    #    puts 'Something went wrong'
-    #    return nil
-    #end
+        print "result x:", node.x," y:",  node.y, "\n"
+        return "#{node.x} #{node.y}" 
 end
 
 
