@@ -2,19 +2,19 @@ var X, Y;
 
 (function() {
  
-    var canvas;
-    var context;
-
     var WIDTH = 80;
     var HEIGHT = 80;
 
-    var PANE = { width : 12, height : 5 };
     var GRID = { width : 5, height : 7 };
 
-    function downSample() {
+    function downSample( id, PANE ) {
         var rez = [];
 
-        var downSampler = DownSampler();
+        var canvas = document.getElementById( id.substring(1) );
+        // Get the 2D canvas context.
+        var context = canvas.getContext('2d');
+
+        var downSampler = DownSampler( id );
 
         for( var j = 0; j < PANE.height ; j++ ) {
            for( var i = 0; i < PANE.width ; i++ ) {
@@ -76,14 +76,19 @@ var X, Y;
         }
     }
 
-    function submit() {
+    function recognize() {
         $("#answer").html(""); 
 
-        var result = downSample();
+        var result = downSample("#area", { width : 12, height : 5 } );
 
         renderDownsampled(result);
-        renderData(result); 
+        renderData(result);
+
+        var brojac = 0;
+        var recognized = new Array( result.length ); 
         
+        var url = "/recognize/som"; 
+
         for( var i = 0; i < result.length; i++ ) {
             if( result[i] === null ) continue;
             var data = [];
@@ -93,23 +98,43 @@ var X, Y;
                     data.push( result[i][y][x] ? 1 : 0 );
                 }
             }
+
             (function (i) {
-            $.post('/', { data : data}, function(data) {
-                console.log( i, " -> ", data );
-            });}(i))
+                //console.log("saljem ", data);
+
+                $.post( url , { data : data}, function( value ) {
+                    recognized[i] = value;
+                    
+                    if( brojac === result.length - 1 ) {
+                        console.log( recognized );
+                    }
+
+                });
+
+            }(i));
         }
 
     }
 
+    function train() {
+        var result = downSample("#trainArea", { width : 12, height : 12 } );
+        console.log( result );
+
+        var ok = true;
+        for( var i = 0; i < result.length; i++ ) {
+            if( result[i] === null ) ok = false;
+        }
+
+        if( ok ) {
+            $.post('/train', { 'data' : JSON.stringify( result ) } );
+        }
+    }
 
 
-    $( function() {
 
-        canvas = document.getElementById("area");
-        // Get the 2D canvas context.
-        context = canvas.getContext('2d');
- 
-        $('.submit-btn').click( submit );
+    $( function() { 
+        $('#recognizeBtn').click( recognize );
+        $('#trainBtn').click( train );
     });
 
 })();

@@ -27,14 +27,29 @@
 
             <div class='row'>
                 <div class='span12 buttons'>
-                    <button class='btn btn-danger clear-btn'>Clear input</button>
-                    <button class='btn btn-primary submit-btn'>Recognize and calculate</button>
+                    <button id='clearBtn' class='btn btn-danger clear-btn'>Clear input</button>
+                    <button id='recognizeBtn' class='btn btn-primary submit-btn'>Recognize and calculate</button>
                 </div>
             </div>
 
             <p id='answer'>
                             
             </p>
+
+
+            <p>
+                <div class='row'>
+                    <div class='span12 center'>
+                        <canvas id='trainArea' width=961 height=961 >Sorry your browser doesn't support the canvas element</canvas> 
+                    </div>
+                </div>
+            </p>
+
+            <div class='row'>
+                <div class='span12 buttons'>
+                    <button id='trainBtn' class='btn btn-danger clear-btn'>Train</button>
+                </div>
+            </div>
 
         </div>    
     </body>

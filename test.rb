@@ -38,7 +38,7 @@ class Recognizer
         node = nil
         index = 0
         
-        @neuons.each_with_index do |n, i|
+        @neurons.each_with_index do |n, i|
             if min_d >= n.distance_to_input( d ) then
                 node = n
                 min_d = node.distance_to_input( d ) # plain stupid

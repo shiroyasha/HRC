@@ -1,8 +1,14 @@
 
-#area {
+#area, #trainArea {
     background-image: url('../img/grid.png');
-    width: 961px;  /* 80 * 12 + 1 */
-    height: 401px; /* 80 * 5 + 1 */ 
+}
+
+#area, #trainArea {
+    cursor: crosshair;
+}
+
+#area:active, #trainArea:active { 
+    cursor: crosshair;
 }
 
 .center {
@@ -16,10 +22,4 @@
     margin-left: 10px;
 }
 
-#area {
-    cursor: crosshair;
-}
 
-#area:active { 
-    cursor: crosshair;
-}

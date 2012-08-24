@@ -1,10 +1,10 @@
-var DownSampler = function() {
+var DownSampler = function(id) {
     public = {};
 
     function visual(color, x, y, w, h ) {
 
-        console.log( X, Y );
-        var canvas = document.getElementById("area");
+        //console.log( X, Y );
+        var canvas = document.getElementById( id.substring(1) );
         // Get the 2D canvas context.
         var c = canvas.getContext('2d');
         c.save();
@@ -69,7 +69,7 @@ var DownSampler = function() {
 
        var w = Math.floor( area.width / grid.width);
        var h = Math.floor( area.height / grid.height);
-       console.log( area, w, h );
+       //console.log( area, w, h );
 
        for( var i = 0; i < grid.height; i++ ) {
            for( var j = 0; j < grid.width; j++) {
@@ -88,7 +88,7 @@ var DownSampler = function() {
        }
        visual( "#0f0", area.x, area.y, area.width, area.height );
 
-       console.log( ret );
+       //console.log( ret );
 
        return ret;
     }    
