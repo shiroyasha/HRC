@@ -15,7 +15,7 @@ SYMBOLS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', "-"]
 
 
 get '/' do
-    erb "hello world"
+   File.read(File.join('public', 'index.html')) 
 end
 
 get '/trained' do
