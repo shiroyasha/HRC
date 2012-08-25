@@ -1,5 +1,5 @@
 
-#area, #trainArea {
+#area,#area2, #trainArea {
     background-image: url('../img/grid.png');
 }
 
@@ -20,6 +20,14 @@
     float:right;
 
     margin-left: 10px;
+}
+
+hr {
+    margin-top: 100px;
+}
+
+h1.page-header {
+    display: inline-block;
 }
 
 

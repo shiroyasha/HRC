@@ -2,7 +2,7 @@ var DownSampler = function(id) {
     public = {};
 
     function visual(color, x, y, w, h ) {
-
+        if( !VISUAL ) return;
         //console.log( X, Y );
         var canvas = document.getElementById( id.substring(1) );
         // Get the 2D canvas context.

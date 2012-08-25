@@ -8,14 +8,19 @@ require 'json'
 $som = nil
 $multilayer = nil
 
-SYMBOLS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', "-"]
+if File.exist?('data/som.bin') then $som = Marshal.load(File.read('data/som.bin')) end
+if File.exist?('data/multilayer.bin') then $multilayer = Marshal.load(File.read('data/multilayer.bin')) end
+
+SYMBOLS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', "-"]
 
 
 get '/' do
     erb "hello world"
 end
 
-
+get '/trained' do
+    return ( $som and $multilayer )
+end
 
 
 post '/train' do
@@ -31,6 +36,10 @@ post '/train' do
     $multilayer = MultilayerRecognizer.new data, 12, false
 
     puts "training ended"
+
+    File.open('data/som.bin', 'w') {|f| f.write(Marshal.dump($som)) }
+    File.open('data/multilayer.bin', 'w') { |f| f.write(Marshal.dump($multilayer)) }
+
     return "yay"
 end
 

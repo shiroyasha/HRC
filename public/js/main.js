@@ -84,6 +84,7 @@
         var train = DrawingArea("#trainArea");
 
         $('#clearBtn').click( area.clear );
+        $('#trainClearBtn').click( train.clear );
     });
 
 })();

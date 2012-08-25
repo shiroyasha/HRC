@@ -1,10 +1,14 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <title>Handwritting calculator</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type='text/css' />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" type='text/css' />
         <link rel="stylesheet" href="css/style.css" type='text/css' />
 
         <script type='text/javascript' src='js/jquery.js'></script>
+        <script type='text/javascript' src='bootstrap/js/bootstrap.js'></script>
         <script type='text/javascript' src='js/main.js'></script>
         <script type='text/javascript' src='js/imageUtil.js'></script>
         <script type='text/javascript' src='js/submit.js'></script>
@@ -14,43 +18,114 @@
 
     <body>
         <div class='container'>
-            
-            <h1 class='page-header'>Handwriting Recognition Calculator</h1>
-            
-            <p>
-                <div class='row'>
-                    <div class='span12 center'>
-                        <canvas id='area' width=961 height=401 >Sorry your browser doesn't support the canvas element</canvas> 
-                    </div>
-                </div>
-            </p>
+            <h1 class='page-header'>Handwriting Recognition Calculator<small> by Igor Šarčević</small></h1>
 
-            <div class='row'>
-                <div class='span12 buttons'>
-                    <button id='clearBtn' class='btn btn-danger clear-btn'>Clear input</button>
-                    <button id='recognizeBtn' class='btn btn-primary submit-btn'>Recognize and calculate</button>
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#calculator" data-toggle="tab">Calculator</a></li>
+                <li><a href="#log-tab" data-toggle="tab">Output Log</a></li>
+                <li><a href="#train" data-toggle="tab">Train</a></li>
+            </ul>
+            <div class="tab-content"> 
+                <div class="tab-pane active" id="calculator">
+                    <div class="alert alert-success">
+                        <strong>HOWTO!</strong> write down the desidered equation which can contain the following symbols (1, 2, 3, 4, 5, 6, 7, 8, 9, +, -). 
+                        One symbol should be written in only one cell! You can start writing anywhere and you can even leave empty cells between symbols. 
+                         
+                    </div>  
+                    <p>
+                        <div class='row'>
+                            <div class='span12 center'>
+                                <canvas id='area' width=961 height=401 >Sorry your browser doesn't support the canvas element</canvas> 
+                            </div>
+                        </div>
+                    </p>
+                
+                    <div class='row'>
+                        <div class='span12 buttons'>
+                            <!--
+                            <label class="radio inline">
+                                <input type="radio" name="optionsRadios" id="som-opt" value="option1" checked>
+                                som
+                            </label>
+
+                            <label class="radio inline">
+                                <input type="radio" name="optionsRadios" id="multilayer-opt" value="option2">
+                                multilayer
+                            </label>
+                            -->
+                            <label class="checkbox inline">
+                                <input type="checkbox" id='visual-opt' >
+                                visual log
+                            </label>
+
+                            <button id='clearBtn' class='btn btn-danger clear-btn'>Clear input</button>
+                            <button id='recognizeBtn' class='btn btn-primary submit-btn'>Recognize and calculate</button>
+                        </div>
+                    </div>
+
+                    <p>
+                        <div class='row'>
+                            <div class='span12 center'>
+                                <div id='answer'> </div> 
+                            </div>
+                        </div>
+                    </p>
+
+
                 </div>
+
+
+
+
+
+                <div class="tab-pane" id="log-tab">
+                    <p>
+                      <div class='row'>
+                            <div class='span12 center'>
+
+                                <div id='log'> <h1>No output log made yet </h1> </div>
+                            </div>
+                        </div>
+                    </p>
+                </div>
+
+
+
+                <div class="tab-pane" id="train">
+                    <div class="alert alert-success">
+                        <strong>Tip!</strong> fill the table bellow with the following values (1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -, + ) in that order! 
+                        A row should only contain equal values ( for example the first line should contain twelve of 1). 
+                         
+                    </div>                  
+                    <p>
+                        <div class='row'>
+                            <div class='span12 center'>
+                                <canvas id='trainArea' width=961 height=961 >Sorry your browser doesn't support the canvas element</canvas> 
+                            </div>
+                        </div>
+                    </p>
+
+                    <div class='row'>
+                        <div class='span12 buttons'>
+                            <button id='trainClearBtn' class='btn btn-danger'>Clear input</button>
+                            <button id='trainBtn' class='btn btn-primary'>Train</button>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
-            <p id='answer'>
-                            
-            </p>
-
-
-            <p>
+            <div id="footer">
+                <hr />
                 <div class='row'>
                     <div class='span12 center'>
-                        <canvas id='trainArea' width=961 height=961 >Sorry your browser doesn't support the canvas element</canvas> 
+                        <p>Designed and built with love by Igor Šarčević</p>
+                        <p>Project source can be found on <a href='https://github.com/shiroyasha/HRC'>GitHub</a> and the documentation on <a href='https://docs.google.com/open?id=0B42oT-Te1-99MFNLd3hEM0JrUVU'>Google Docs</a>( in Serbian )</p>
+                        <p>Code is licenced under <a href='http://www.apache.org/licenses/LICENSE-2.0'>Apache Commons 2.0</a> &amp the documentation under <a href='http://creativecommons.org/licenses/by/3.0/'>CC 3.0</a></p>
                     </div>
                 </div>
-            </p>
-
-            <div class='row'>
-                <div class='span12 buttons'>
-                    <button id='trainBtn' class='btn btn-danger clear-btn'>Train</button>
-                </div>
             </div>
-
         </div>    
     </body>
 

@@ -1,4 +1,4 @@
-var X, Y;
+var X, Y, VISUAL = false;
 
 (function() {
  
@@ -31,7 +31,7 @@ var X, Y;
     }
 
     function renderDownsampled(rez) {
-        $('#answer').append("<canvas width=961 height=401 id='area2'> </canvas>");
+        $('#log').append("<canvas width=961 height=401 id='area2'> </canvas>");
 
         var canvas2 = document.getElementById("area2");
         var c2 = canvas2.getContext('2d');
@@ -61,6 +61,7 @@ var X, Y;
     }
 
     function renderData(rez) {
+        $("#log").append("<h2>Output vectors</h2>");
         for( var i = 0; i < rez.length; i++) { 
             if( rez[i] === null ) continue;
 
@@ -72,25 +73,42 @@ var X, Y;
                 }
             }    
             d += i === rez.lenght - 1 ? "]" : "],";
-            $("#answer").append("<p>" + d + "</p>");
+            $("#log").append("<p>" + d + "</p>");
         }
     }
 
-    function recognize() {
-        $("#answer").html(""); 
+    function renderAnswer( answer ) {
+        $("#answer").html("");
+        var s = "";
+
+        for( var i = 0; i < answer.length; i++ ) {
+            s += answer[i];
+        }
+        var e;
+        try {
+            var e = eval(s);
+        }catch(ex) {
+            e = "#error: cannot calculate value"
+        }
+        $("#log").append("<h1>" + s + " = " + e + "</h1>");
+        $("#answer").append("<h1>" + s + " = " + e + "</h1>");
+    }
+
+    function recognize(url) {
+        $("#log").html(""); 
 
         var result = downSample("#area", { width : 12, height : 5 } );
-
         renderDownsampled(result);
         renderData(result);
 
+        result = result.filter( function(element) { return (element !== null)} );
+
+
         var brojac = 0;
-        var recognized = new Array( result.length ); 
-        
-        var url = "/recognize/som"; 
+        var recognized = new Array( result.length );
+         
 
         for( var i = 0; i < result.length; i++ ) {
-            if( result[i] === null ) continue;
             var data = [];
 
             for( var y = 0; y < GRID.height; y++) {
@@ -104,9 +122,11 @@ var X, Y;
 
                 $.post( url , { data : data}, function( value ) {
                     recognized[i] = value;
-                    
-                    if( brojac === result.length - 1 ) {
+                    brojac++; 
+                    //console.log( 'brojac', brojac, )                    
+                    if( brojac === result.length ) {
                         console.log( recognized );
+                        renderAnswer( recognized );
                     }
 
                 });
@@ -133,8 +153,20 @@ var X, Y;
 
 
     $( function() { 
-        $('#recognizeBtn').click( recognize );
+        $('#recognizeBtn').click( function() {
+            var url = '/recognize/som';
+        //            if( $('#multilayer-opt').attr("checked") != "undefined" && 
+         //       $('#multilayer-opt').attr("checked") == "checked") url = '/recognize/multilayer';
+
+            recognize(url); 
+        });
+
         $('#trainBtn').click( train );
+
+        $('#visual-opt').change( function() {
+            if( this.checked ) VISUAL = true;
+            else VISUAL = false;
+        });
     });
 
 })();
